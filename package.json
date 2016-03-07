@@ -1,0 +1,19 @@
+{
+  "name": "site-monitor",
+  "version": "0.0.1",
+  "description": "Simple app to check whether a site is up.",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anthonyvia/site-monitor.git"
+  },
+  "author": "Anthony Via",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anthonyvia/site-monitor/issues"
+  },
+  "homepage": "https://github.com/anthonyvia/site-monitor",
+  "dependencies": {
+    "async": "^1.5.2"
+  }
+}
