@@ -14,6 +14,8 @@
   },
   "homepage": "https://github.com/anthonyvia/site-monitor",
   "dependencies": {
-    "async": "^1.5.2"
+    "async": "1.5.2",
+    "node-uuid": "1.4.7",
+    "restify": "4.1.1"
   }
 }
