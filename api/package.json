@@ -1,8 +1,8 @@
 {
-  "name": "site-monitor",
+  "name": "site-monitor-api",
   "version": "0.0.1",
-  "description": "Simple app to check whether a site is up.",
-  "main": "lib/index.js",
+  "description": "HTTP JSON API for site-monitor.",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/anthonyvia/site-monitor.git"
@@ -16,6 +16,7 @@
   "dependencies": {
     "async": "1.5.2",
     "node-uuid": "1.4.7",
+    "promise-mysql": "2.0.0",
     "restify": "4.1.1"
   }
 }

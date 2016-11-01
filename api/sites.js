@@ -1,35 +1,25 @@
-var uuid = require('node-uuid');
-var sites = {};
+var db = require('./lib/database');
 
 function createSite(req, res, next) {
   if (!req.body || !req.body.name || !req.body.url) {
     res.send(400, 'site name and url required');
-    next();
-    return;
+    return next();
   }
 
-  var id = uuid.v4();
-  sites[id] = {
-    id: id,
+  var site = {
     name: req.body.name,
     url: req.body.url
   };
-  res.send(201, sites[id]);
-  next();
-}
 
-function getSite(req, res, next) {
-  var site = sites[req.params.id];
-  if (!site) {
-    res.send(404, 'site not found');
+  db.createSite(site, function (err, createdSite) {
+    if (err)
+      return next(err);
+
+    res.send(201, createdSite);
     next();
-    return;
-  }
-  res.send(200, site);
-  next();
+  });
 }
 
 module.exports = {
-  createSite: createSite,
-  getSite: getSite
+  createSite: createSite
 };
