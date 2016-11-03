@@ -6,12 +6,7 @@ function createSite(req, res, next) {
     return next();
   }
 
-  var site = {
-    name: req.body.name,
-    url: req.body.url
-  };
-
-  db.createSite(site, function (err, createdSite) {
+  db.createSite(req.body.name, req.body.url, function (err, createdSite) {
     if (err)
       return next(err);
 
@@ -20,6 +15,17 @@ function createSite(req, res, next) {
   });
 }
 
+function listSites(req, res, next) {
+  db.getSites(function (err, sites) {
+    if (err)
+      return next(err);
+
+    res.send(200, { sites: sites });
+    next();
+  });
+}
+
 module.exports = {
-  createSite: createSite
+  createSite: createSite,
+  listSites: listSites
 };

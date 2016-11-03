@@ -1,5 +1,6 @@
 var mysql = require('promise-mysql');
 var uuid = require('node-uuid');
+var Site = require('./site');
 
 var options = {
   host: 'mysql',
@@ -10,7 +11,7 @@ var options = {
 
 var pool = mysql.createPool(options);
 
-function createSite(site, cb) {
+function createSite(name, url, cb) {
   var query = '\
 INSERT INTO sites (id, name, url, created_date, is_active, is_deleted) \
 VALUES (?, ?, ?, ?, ?, ?);';
@@ -19,9 +20,25 @@ VALUES (?, ?, ?, ?, ?, ?);';
   var createdDate = new Date();
 
   pool
-    .query(query, [id, site.name, site.url, createdDate, 1, 0])
+    .query(query, [id, name, url, createdDate, 1, 0])
     .then(function (rows) {
-      return cb(null, { id: id, name: site.name, url: site.url, createdDate: createdDate });
+      return cb(null, new Site({ id: id, name: name, url: url, createdDate: createdDate }));
+    })
+    .catch(function (err) {
+      return cb(err);
+    });
+}
+
+function getSites(cb) {
+  var query = '\
+SELECT s.id, s.name, s.url, s.created_date AS \'createdDate\'\
+FROM sites s \
+WHERE s.is_active = 1 AND s.is_deleted = 0;';
+
+  pool
+    .query(query)
+    .then(function (rows) {
+      return cb(null, rows.map(function (row) { return new Site(row); }))
     })
     .catch(function (err) {
       return cb(err);
@@ -29,5 +46,6 @@ VALUES (?, ?, ?, ?, ?, ?);';
 }
 
 module.exports = {
-  createSite: createSite
+  createSite: createSite,
+  getSites: getSites
 };
