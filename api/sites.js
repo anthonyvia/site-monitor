@@ -6,7 +6,7 @@ function createSite(req, res, next) {
     return next();
   }
 
-  db.createSite(req.body.name, req.body.url, function (err, createdSite) {
+  db.createSite(req.body.name, req.body.url, function _createSite(err, createdSite) {
     if (err)
       return next(err);
 
@@ -16,7 +16,7 @@ function createSite(req, res, next) {
 }
 
 function listSites(req, res, next) {
-  db.getSites(function (err, sites) {
+  db.getSites(function _getSites(err, sites) {
     if (err)
       return next(err);
 

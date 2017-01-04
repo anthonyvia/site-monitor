@@ -26,13 +26,13 @@ COMMIT;';
 
   pool
     .query(query, [id, name, url, 30, createdDate, 1, 0, id, null, 12])
-    .then(function () {
+    .then(function _returnCreatedSite() {
       return cb(null, new Site({ id: id, name: name, url: url, check_interval: 30, createdDate: createdDate }));
     })
-    .catch(function (err) {
+    .catch(function _rollbackTransactionOnError(err) {
       pool
         .query('ROLLBACK;')
-        .then(function () {
+        .then(function _returnError() {
           return cb(err);
         });
     });
@@ -46,10 +46,10 @@ WHERE s.is_active = 1 AND s.is_deleted = 0;';
 
   pool
     .query(query)
-    .then(function (rows) {
-      return cb(null, rows.map(function (row) { return new Site(row); }))
+    .then(function _returnSites(rows) {
+      return cb(null, rows.map(function _returnSite(row) { return new Site(row); }))
     })
-    .catch(function (err) {
+    .catch(function _returnError(err) {
       return cb(err);
     });
 }
