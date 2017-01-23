@@ -1,0 +1,13 @@
+{
+  "name": "site-monitor-common",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.js",
+  "author": "Anthony Via",
+  "license": "MIT",
+  "dependencies": {
+    "bunyan": "1.8.5",
+    "node-uuid": "1.4.7",
+    "promise-mysql": "3.0.0"
+  }
+}

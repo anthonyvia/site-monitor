@@ -1,0 +1,13 @@
+{
+  "name": "monitor",
+  "version": "0.0.1",
+  "description": "Standalone process responsible for running site checks at their specified intervals.\"",
+  "main": "index.js",
+  "author": "Anthony Via",
+  "license": "MIT",
+  "dependencies": {
+    "async": "2.1.4",
+    "promise-mysql": "3.0.0",
+    "request": "2.79.0"
+  }
+}

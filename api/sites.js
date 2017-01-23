@@ -1,4 +1,4 @@
-var db = require('./lib/database');
+var db = require('site-monitor-common').database;
 
 function createSite(req, res, next) {
   if (!req.body || !req.body.name || !req.body.url) {
